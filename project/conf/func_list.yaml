@@ -1,0 +1,52 @@
+WorkingAge:  
+  Name: WorkingAge
+  Alias: 工龄计算函数
+  Method: 计算工龄函数，入职当年计入为工龄1年，此后每年累加1
+  NeedParams: false
+  Required: [on_board_date]
+  Params: []
+  Return: 数值
+BaseSalary:
+  Name: BaseSalary
+  Alias: 获取基本工资
+  Method: 从系统取得设定的基本工资
+  NeedParams: false
+  Required: []
+  Params: []
+  Return: 基本工资
+Taxable:
+  Name: Taxable
+  Alias: 个税计算器
+  NeedParams: false
+  Method: 传入应纳税金额
+  Required: [应纳税金额]
+  NeedRequired: true
+  Params: []
+  Return: 应缴个税
+Range:
+  Name: Range
+  Alias: 区间计算
+  Method: 系统会要求你输入区间范围，即上限与下限
+  Required: []
+  NeedRequired: true
+  NeedParams: true 
+  Params: [上限,下限]
+  Return: 区间值
+TimeRange:
+  Name: TimeRange
+  Alias: 时间范围计算
+  Method: 系统会要求你输入月份范围，比如5月和9月，满足的话会返回指定的值
+  Required: []
+  NeedRequired: false
+  NeedParams: true
+  Params: [开始月份, 结束月份, 值 ]
+  Return: 值
+IF:
+  Name: IF
+  Alias: 判断
+  Method: 要求 参数1:判断表达式; 参数2:为真时值（可为表达式）; 参数2:为假时值（可为表达式）;
+  Required: []
+  NeedRequired: true
+  NeedParams: true
+  Params: [判断表达式, 真值表达式, 假值表达式 ]
+  Return: 值

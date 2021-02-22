@@ -1,0 +1,58 @@
+version: '3'
+services: 
+  db:
+    image: postgres:latest
+    container_name: postgres01
+    environment:
+         POSTGRES_PASSWORD: 123456
+         POSTGRES_USER: postgres
+         POSTGRES_DB: db_hr
+    ports:
+      - "5433:5432"
+    networks: ['mynetwork']
+  web:
+    build: .
+    container_name: hr
+    command: bash -c "./main"
+    volumes:
+      - ./project:/src
+    expose:
+      - "8081"
+      - "8080"
+    ports:
+      - "8090:8080"
+    stdin_open: false
+    links:
+      - db
+    tty: false
+    networks: ['mynetwork']
+    restart: always
+    #nginx:
+    #  build: 
+    #    context: ./
+    #    dockerfile: DockerfileNg
+    #  container_name: nginx01
+    #  ports:
+    #    - "8090:80"
+    #  expose:
+    #    - "80"
+    #  volumes:
+    #    - ./project/front:/usr/share/nginx/html
+    #    - ./config/nginx:/etc/nginx/conf.d
+    #  links:
+    #    - web 
+    #  networks: ['mynetwork']
+    #  restart: always
+  nginx:
+    image: nginx
+    container_name: nginx03
+    ports:
+      - "8010:80"
+    volumes:
+      - ./project/front:/usr/share/nginx/html
+      - ./config/nginx:/etc/nginx/conf.d
+    links:
+      - web 
+    networks: ['mynetwork']
+    restart: always
+networks: {mynetwork: {}}
